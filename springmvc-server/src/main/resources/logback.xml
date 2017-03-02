@@ -35,7 +35,7 @@
     <logger name="org.springframework" level="INFO">
         <appender-ref ref="tomcatRolling"/>
     </logger>
-    <logger name="com.lee" level="INFO">
+    <logger name="com.lee.demo.springmvc" level="INFO">
         <appender-ref ref="tomcatRolling"/>
     </logger>
     <root level="WARN">
