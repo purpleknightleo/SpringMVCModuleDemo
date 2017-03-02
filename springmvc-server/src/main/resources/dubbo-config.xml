@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="DubboConsumer" />
+    <dubbo:protocol accesslog="true" />
+    <!--<dubbo:registry protocol="multicast" address="${dubbo_registry_address}"-->
+                    <!--check="false" />-->
+    <dubbo:registry id="zkRegistry" protocol="zookeeper" address="${dubbo_registry_address}"
+                    check="false" />
+
+    <dubbo:reference id="demoFacade" registry="zkRegistry" check="false"
+                     interface="com.lee.demo.dubbo.service.facade.DemoFacade" version="${dubbo_service_version}"
+                     timeout="3000" protocol="dubbo"/>
+</beans>

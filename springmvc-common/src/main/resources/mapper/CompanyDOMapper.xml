@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.demo.springmvc.common.dao.CompanyDAO">
+
+    <resultMap type="CompanyDO"
+               id="companyMap">
+        <!-- 用id属性来映射主键字段 -->
+        <id property="cid" column="cid"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="name" column="name"/>
+        <result property="industry" column="industry"/>
+    </resultMap>
+
+    <!-- query a company by cid -->
+    <select id="getCompanyByCid" resultType="CompanyDO" parameterType="Long">
+        SELECT *
+        FROM company
+        WHERE  cid = #{cid}
+    </select>
+
+    <!-- add a company -->
+    <insert id="addCompany" parameterType="CompanyDO">
+        INSERT INTO company (cid,name,industry ) VALUES (#{cid},#{name}, #{industry})
+    </insert>
+
+    <!-- update a company -->
+    <insert id="updateCompany" parameterType="CompanyDO">
+        UPDATE company
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="industry != null">
+                industry = #{industry},
+            </if>
+        </set>
+        WHERE cid = #{cid}
+    </insert>
+
+    <!-- delete a company -->
+    <insert id="deleteCompany" parameterType="Long">
+        DELETE FROM company WHERE cid = #{cid}
+    </insert>
+
+</mapper>
+
