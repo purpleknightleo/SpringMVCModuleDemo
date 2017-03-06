@@ -115,4 +115,25 @@ public class MockMvcController {
         return PackUtils.genErrorResponse(300, "internal error");
     }
 
+    /**
+     * PUT请求更新用户信息
+     * 注意传入的userDTO需要用@ModelAttribute修饰，因为它既不是POST body，也不是单纯的URL param
+     *
+     * @param uid
+     * @param userDTO
+     */
+    @RequestMapping(value = "/user/{uid}", method = RequestMethod.PUT)
+    public void updateUserInfo(@PathVariable Long uid, @ModelAttribute UserDTO userDTO) {
+        logger.info("update user info, uid = {}, new name = {}", uid, userDTO.getName());
+    }
+
+    /**
+     * DELETE请求删除用户
+     *
+     */
+    @RequestMapping(value = "/user/{uid}", method = RequestMethod.DELETE)
+    public void delUser(@PathVariable Long uid) {
+        logger.info("delete user, uid = {}", uid);
+    }
+
 }

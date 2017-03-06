@@ -16,12 +16,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -114,6 +114,23 @@ public class MockMvcControllerTest { //extends AbstractTransactionalTestNGSpring
         mvc.perform(
             post("/mockmvc/company/add").contentType(MediaType.APPLICATION_JSON_UTF8).content(
                 jsonStr)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(200));
+    }
+
+    @org.junit.Test
+    public void updateUser() throws Exception {
+        Long uid = 4L;
+        RequestBuilder request = put("/mockmvc/user/" + uid.toString())
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED).param("uid", uid.toString())
+            .param("name", "Jason");
+        mvc.perform(request).andDo(print()).andExpect(status().isOk());
+    }
+
+    @org.junit.Test
+    public void delUser() throws Exception {
+        Long uid = 4L;
+        mvc.perform(
+            delete("/mockmvc/user/" + uid.toString()).contentType(
+                MediaType.APPLICATION_FORM_URLENCODED)).andExpect(status().isOk());
     }
 
 }
