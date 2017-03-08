@@ -1,5 +1,7 @@
 package com.lee.demo.springmvc.utils;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,10 +30,7 @@ public class PackUtils {
      * @return
      */
     public static Map<String, Object> genSuccessResponse(Map<String, Object> mapRet) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 200);
-        map.put("ret", mapRet);
-        return map;
+        return genSuccessResponse(mapRet, 200);
     }
 
     /**
@@ -49,6 +48,30 @@ public class PackUtils {
     }
 
     /**
+     * 生成正确结果
+     * 
+     * @param ret
+     * @return
+     */
+    public static String genSuccessResponseStr(Object ret) {
+        return genSuccessResponseStr(ret, 200);
+    }
+
+    /**
+     * 生成正确结果
+     * 
+     * @param ret
+     * @param code
+     * @return
+     */
+    public static String genSuccessResponseStr(Object ret, int code) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        json.put("ret", ret);
+        return json.toString();
+    }
+
+    /**
      * 生成错误结果
      *
      * @param code
@@ -60,6 +83,20 @@ public class PackUtils {
         map.put("code", code);
         map.put("msg", msg);
         return map;
+    }
+
+    /**
+     * 生成错误结果
+     *
+     * @param code
+     * @param msg
+     * @return
+     */
+    public static String genErrorResponseStr(int code, String msg) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        json.put("msg", msg);
+        return json.toString();
     }
 
 }
