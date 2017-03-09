@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * MockMvcController对应的测试类(同时支持JUnit和TestNG，TestNG相关代码暂时注释了)
- * 需要注意的是：@ActiveProfiles(profiles = "dev")需要放在前面，不然不生效
+ * 需要注意的是：@ActiveProfiles(profiles = "dev")好像并未生效
  *
  * Created by hzlifan on 2017/2/27.
  */
